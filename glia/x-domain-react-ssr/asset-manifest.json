@@ -1,16 +1,16 @@
 {
   "files": {
     "main.css": "/static-hosting/glia/x-domain-react-ssr/static/css/main.073c9b0a.css",
-    "main.js": "/static-hosting/glia/x-domain-react-ssr/static/js/main.675809d3.js",
+    "main.js": "/static-hosting/glia/x-domain-react-ssr/static/js/main.7e1fe5b7.js",
     "static/js/787.ce80bfa2.chunk.js": "/static-hosting/glia/x-domain-react-ssr/static/js/787.ce80bfa2.chunk.js",
     "static/media/logo.svg": "/static-hosting/glia/x-domain-react-ssr/static/media/logo.6ce24c58023cc2f8fd88fe9d219db6c6.svg",
     "index.html": "/static-hosting/glia/x-domain-react-ssr/index.html",
     "main.073c9b0a.css.map": "/static-hosting/glia/x-domain-react-ssr/static/css/main.073c9b0a.css.map",
-    "main.675809d3.js.map": "/static-hosting/glia/x-domain-react-ssr/static/js/main.675809d3.js.map",
+    "main.7e1fe5b7.js.map": "/static-hosting/glia/x-domain-react-ssr/static/js/main.7e1fe5b7.js.map",
     "787.ce80bfa2.chunk.js.map": "/static-hosting/glia/x-domain-react-ssr/static/js/787.ce80bfa2.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.073c9b0a.css",
-    "static/js/main.675809d3.js"
+    "static/js/main.7e1fe5b7.js"
   ]
 }
