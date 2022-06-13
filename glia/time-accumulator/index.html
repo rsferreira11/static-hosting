@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/rxjs/5.0.2/Rx.js"></script>
+</head>
+<body>
+  <p>Global Time</p>
+  <p id="curTime"></p>
+  <p>Focused Time</p>
+  <p id="focusedTime"></p>
+  <br>
+  <p>Is Focused?</p>
+  <p id="isFocused"></p>
+  <script>
+    const deltaSubject = new Rx.Subject();
+
+    let lastTime = 0;
+
+    function frameLoop(currentTime) {
+      const delta = currentTime - lastTime;
+      lastTime = currentTime;
+      deltaSubject.next(delta);
+      requestAnimationFrame(frameLoop);
+    }
+
+    requestAnimationFrame(frameLoop);
+
+    class Timer {
+      constructor(deltaSubject, isActiveSubject) {
+        this._currentTime = 0;
+        this._deltaSubject = deltaSubject;
+        this._isActiveSubject = isActiveSubject;
+
+        this._deltaSubject
+          .filter(() => this._isActiveSubject.value)
+          .subscribe(this._onTimeUpdate.bind(this));
+      }
+
+      _onTimeUpdate(delta) {
+        this._currentTime += delta;
+      }
+
+      get currentTime() {
+        return this._currentTime;
+      }
+    }
+
+    const isFocusedSubject = new Rx.BehaviorSubject(true);
+
+    window.onfocus = () => {
+      isFocusedSubject.next(true);
+    };
+
+    window.onblur = () => {
+      isFocusedSubject.next(false);
+    };
+
+    isFocusedSubject.subscribe((isFocused) => {
+      console.log("isFocused", isFocused);
+    });
+
+    const focusedTimer = new Timer(deltaSubject, isFocusedSubject);
+
+    curTimeEl = document.getElementById('curTime');
+    focusedTimeEl = document.getElementById('focusedTime');
+    isFocusedEl = document.getElementById('isFocused');
+
+    deltaSubject.subscribe(() => {
+      curTime.innerHTML = lastTime.toFixed(0);
+      focusedTimeEl.innerHTML = focusedTimer.currentTime.toFixed(0);
+      isFocusedEl.innerHTML = isFocusedSubject.value;
+
+      if (!isFocusedSubject.value) {
+        console.log("isFocused", isFocusedSubject.value, "currentTime", focusedTimer.currentTime);
+      }
+    });
+  </script>
+</body>
+</html>
